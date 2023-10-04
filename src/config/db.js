@@ -5,12 +5,8 @@ mongoose.set("strict", true)
 mongoose.set("strictQuery", false)
 mongoose.set("strictPopulate", true)
 
-console.log("url", process.env.MONGO_URL)
 mongoose
-.connect(process.env.MONGO_URL, {useUnifiedTopology:true,
-  useNewUrlParser: true,
-  useCreateIndex: true
-})
+.connect(process.env.MONGO_URL)
 .then(()=>{
   console.log("Connected to MongoDB")
 })

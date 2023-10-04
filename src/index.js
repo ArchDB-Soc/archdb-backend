@@ -4,8 +4,10 @@ require("./config/db")
 const rateLimit = require('express-rate-limit')
 const mainRouter = require("./routes")
 const { setError } = require("./config/error")
-const app = express()
 
+const cors = require("cors");
+const app = express()
+app.use(cors());
 // Limit each IP to 100 requests every 5 mins
 const limiter = rateLimit({
 	windowMs: 5 * 60 * 1000,
@@ -21,7 +23,7 @@ res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
 res.header("Access-Control-Allow-Headers", "Content-Type")
 next()
 })
-// app.disable("x-powered-by") // remove info about headers for security
+app.disable("x-powered-by") // remove info about headers for security
 
 app.use("/api", mainRouter)
 
@@ -33,7 +35,7 @@ app.use((error, req, res, next)=>{
 return res.status(error.status || 500).json(error.message || "Internal server error 🧯")
 })
 
-const PORT = process.env.port || 4001
+const PORT = process.env.PORT || 4001
 app.listen(PORT, ()=>{
   console.log(`App running in: http://localhost:${PORT}`)
 })
