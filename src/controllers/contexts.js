@@ -10,10 +10,11 @@ const { setError } = require("../config/error");
 const getAllContexts = async (req, res, next) => {
   try {
     const { filter } = req.query;
+    console.log("hello")
     const Contexts = await getAllContextsFromDb(filter);
     res.status(200).json({ data: Contexts });
   } catch {
-    return next(setError(400, "Can't find Contexts"));
+    return next(setError(400, "Can't find Contexts hello"));
   }
 };
 

@@ -21,7 +21,7 @@ res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
 res.header("Access-Control-Allow-Headers", "Content-Type")
 next()
 })
-app.disable("x-powered-by") // remove info about headers for security
+// app.disable("x-powered-by") // remove info about headers for security
 
 app.use("/api", mainRouter)
 
@@ -33,7 +33,7 @@ app.use((error, req, res, next)=>{
 return res.status(error.status || 500).json(error.message || "Internal server error 🧯")
 })
 
-const PORT = 4001
+const PORT = process.env.port || 4001
 app.listen(PORT, ()=>{
   console.log(`App running in: http://localhost:${PORT}`)
 })
