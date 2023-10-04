@@ -1,10 +1,10 @@
 const { Context } = require("../models/mongo");
 
 const getAllContextsFromDb = async (filter) => {
-  try {const nameFilterOptions = {
-    name: { $regex: new RegExp(filter, "i") },
+  try {const descriptionFilterOptions = {
+    description: { $regex: new RegExp(filter, "i") },
   };
-  const Contexts = await Context.find(filter ? nameFilterOptions : {});
+  const Contexts = await Context.find(filter ? descriptionFilterOptions : {});
   return Contexts;}
   catch (error) { console.log("Error:", error)}
 };
