@@ -5,7 +5,7 @@ mongoose.set("strict", true)
 mongoose.set("strictQuery", false)
 mongoose.set("strictPopulate", true)
 
-console.log(MONGO_URL)
+console.log("url", process.env.MONGO_URL)
 mongoose
 .connect(process.env.MONGO_URL, {useUnifiedTopology:true,
   useNewUrlParser: true,
