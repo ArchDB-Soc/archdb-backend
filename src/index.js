@@ -4,7 +4,7 @@ require("./config/db")
 const rateLimit = require('express-rate-limit')
 const mainRouter = require("./routes")
 const { setError } = require("./config/error")
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const app = express()
 app.use(cors());
@@ -26,7 +26,7 @@ next()
 app.disable("x-powered-by") // remove info about headers for security
 
 
-// app.use(cookieParser());
+app.use(cookieParser());
 
 app.use("/api", mainRouter)
 
