@@ -73,8 +73,11 @@ await deleteUserFromDb(id)
   
   const loginUser = async (req, res, next)=>{
      console.log("anyone there?")
-    try {const {email, password} = req.body
+    try {
+      const {email, password} = req.body
+      console.log("email",email)
       const user = await getUserByEmailFromDb(email)
+      console.log("user", user)
       if (!user) {
         res.status(401).json({data: "user doesn't exist"})
       return
