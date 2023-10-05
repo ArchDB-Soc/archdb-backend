@@ -27,6 +27,7 @@ app.disable("x-powered-by") // remove info about headers for security
 
 
 app.use(cookieParser());
+app.options('*', cors())
 
 app.use("/api", mainRouter)
 
