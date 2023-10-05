@@ -72,10 +72,8 @@ await deleteUserFromDb(id)
   // }
   
   const loginUser = async (req, res, next)=>{
-     console.log("anyone there?")
     try {
       const {email, password} = req.body
-      console.log("email",email)
       const user = await getUserByEmailFromDb(email)
       console.log("user", user)
       if (!user) {
@@ -88,7 +86,9 @@ await deleteUserFromDb(id)
         return
       }
       const token = signToken({id: user._id })
+      console.log("token", token)
       const {password: unusedPassword, ...restUser} = user
+      console.log("user",user)
   //        res.cookie('access_token', token, {
   //    maxAge: 3600 * 1000,
   //    httpOnly: true,
