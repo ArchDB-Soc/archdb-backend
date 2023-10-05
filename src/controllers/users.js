@@ -72,10 +72,9 @@ await deleteUserFromDb(id)
   // }
   
   const loginUser = async (req, res, next)=>{
+     console.log("anyone there?")
     try {const {email, password} = req.body
-    console.log("info from db", email, password)
       const user = await getUserByEmailFromDb(email)
-      console.log("user", user)
       if (!user) {
         res.status(401).json({data: "user doesn't exist"})
       return
@@ -87,7 +86,6 @@ await deleteUserFromDb(id)
       }
       const token = signToken({id: user._id })
       const {password: unusedPassword, ...restUser} = user
-       console.log("token signed 💪")
   //        res.cookie('access_token', token, {
   //    maxAge: 3600 * 1000,
   //    httpOnly: true,
@@ -98,23 +96,6 @@ await deleteUserFromDb(id)
         token, 
         user: restUser
       }})
-    
-    // , (req, res) => {
-//   // Generate a JWT token
-//   const user = { id: 123, username: 'example_user' };
-//   const token = jwt.sign(user, 'your_secret_key_here', { expiresIn: '1h' });
-
-//   // Set the JWT as a cookie
-//   res.cookie('access_token', token, {
-//     maxAge: 3600 * 1000, // Cookie expires in 1 hour (adjust as needed)
-//     httpOnly: true, // Make the cookie accessible only via HTTP
-//     secure: true, // Use this for HTTPS connections (recommended)
-//   });
-
-//   res.send('Login successful');
-// }
-    
-    
     } catch (error) {
         return next(setError(400, "Can't log in user"))
       }
