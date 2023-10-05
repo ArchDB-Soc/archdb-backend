@@ -5,12 +5,13 @@ const {
   createContext, 
   updateContextById,
 deleteContext } = require("../controllers/contexts")
+const { hasValidAuthJwt } = require("../middleware/auth")
 
 const router = express.Router()
 router.get("/", getAllContexts)
 router.get("/:id", getContextById)
-router.post("/", createContext)
-router.put("/:id", updateContextById)
-router.delete("/:id", deleteContext)
+router.post("/", hasValidAuthJwt, createContext)
+router.put("/:id", hasValidAuthJwt, updateContextById)
+router.delete("/:id", hasValidAuthJwt, deleteContext)
 
 module.exports = router
