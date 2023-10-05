@@ -9,6 +9,7 @@ const router = express.Router()
 
 router.get("/", hasValidAuthJwt, getUser)
 router.post("/login", loginUser)
+ 
 // router.post("/register", registerUser )
 
 module.exports = router
