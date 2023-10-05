@@ -75,7 +75,6 @@ await deleteUserFromDb(id)
     try {
       const {email, password} = req.body
       const user = await getUserByEmailFromDb(email)
-      console.log("user", user)
       if (!user) {
         res.status(401).json({data: "user doesn't exist"})
       return
@@ -86,9 +85,8 @@ await deleteUserFromDb(id)
         return
       }
       const token = signToken({id: user._id })
-      console.log("token", token)
       const {password: unusedPassword, ...restUser} = user
-      console.log("user",user)
+
   //        res.cookie('access_token', token, {
   //    maxAge: 3600 * 1000,
   //    httpOnly: true,
