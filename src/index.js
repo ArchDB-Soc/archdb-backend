@@ -9,12 +9,12 @@ const cors = require("cors");
 const app = express()
 
 
-app.use(cors());
+// app.use(cors());
 
 
 app.use(cors({
-  origin: 'https://iadb.netlify.app/login',
-  credentials: true,
+  origin: 'https://iadb.netlify.app/login', // Replace with the allowed origin(s) of your frontend
+  credentials: true, // Set Access-Control-Allow-Credentials to true
 }));
 
 
@@ -38,6 +38,7 @@ app.disable("x-powered-by") // remove info about headers for security
 
 
 app.use(cookieParser());
+// app.options('*', cors())
 
 app.use("/api", mainRouter)
 
