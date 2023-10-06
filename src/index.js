@@ -21,13 +21,14 @@ app.use(express.urlencoded({limit:"1mb", extended: true}))
 app.use((_req,res,next)=>{
 res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
 res.header("Access-Control-Allow-Headers", "Content-Type")
+res.header("Access-Control-Allow-Headers", "credentials")
 next()
 })
 app.disable("x-powered-by") // remove info about headers for security
 
 
 app.use(cookieParser());
-app.options('*', cors())
+// app.options('*', cors())
 
 app.use("/api", mainRouter)
 
