@@ -87,11 +87,11 @@ await deleteUserFromDb(id)
       const token = signToken({id: user._id })
       const {password: unusedPassword, ...restUser} = user
 
-         res.cookie('access_token', token, {
-     maxAge: 3600 * 1000,
-     httpOnly: true,
-     secure: false, 
-   })
+  //        res.cookie('access_token', token, {
+  //    maxAge: 3600 * 1000,
+  //    httpOnly: true,
+  //    secure: false, 
+  //  })
       console.log("signed in!")
       res.status(200).json({data: {
         token, 
