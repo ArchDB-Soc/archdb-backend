@@ -7,7 +7,17 @@ const { setError } = require("./config/error")
 const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const app = express()
+
+
 app.use(cors());
+
+
+app.use(cors({
+  origin: 'https://iadb.netlify.app/login',
+  credentials: true,
+}));
+
+
 // Limit each IP to 100 requests every 5 mins
 const limiter = rateLimit({
 	windowMs: 5 * 60 * 1000,
@@ -28,7 +38,6 @@ app.disable("x-powered-by") // remove info about headers for security
 
 
 app.use(cookieParser());
-// app.options('*', cors())
 
 app.use("/api", mainRouter)
 
