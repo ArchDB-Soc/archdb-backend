@@ -6,6 +6,7 @@ const {
   deleteContextFromDb,
 } = require("../repositories/contexts");
 const { setError } = require("../config/error");
+const { deleteRecordFromDb, deleteAllRecordsFromDb } = require("../repositories/records");
 
 const getAllContexts = async (req, res, next) => {
   try {
@@ -53,6 +54,7 @@ const deleteContext = async (req, res, next) => {
   try {
     const { id } = req.params;
     await deleteContextFromDb(id);
+    await deleteAllRecordsFromDb(id)
     res.status(200).json({ data: "Context deleted" });
   } catch {
     return next(setError(400, "Can't delete Context"));

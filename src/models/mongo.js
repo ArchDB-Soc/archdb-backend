@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const contextSchema = new mongoose.Schema({
-  _record: { type: mongoose.Schema.Types.ObjectId, ref: "Record" },
+  _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
   checkedBy: { type: String, required: false },
   enteredBy: { type: String, required: false },
@@ -33,6 +33,12 @@ const contextSchema = new mongoose.Schema({
   dimensions: { type: String, required: false },
 });
 
+const recordSchema = new mongoose.Schema({
+  _context: {type: mongoose.Schema.Types.ObjectId, 
+    ref: "Context"},
+    name: { type: String, required: false },
+})
+
 const userSchema = new mongoose.Schema({
   name: { type: String, required: false },
   email: { type: String, required: true },
@@ -42,8 +48,9 @@ const userSchema = new mongoose.Schema({
 
 const Context = mongoose.model("Context", contextSchema);
 const User = mongoose.model("User", userSchema);
+const Record = mongoose.model("Record", recordSchema);
 
 
 module.exports = {
-  Context, User
+  Context, User, Record
 };
