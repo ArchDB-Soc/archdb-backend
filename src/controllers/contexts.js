@@ -43,6 +43,7 @@ const createContext = async (req, res, next) => {
 const updateContextById = async (req, res, next) => {
   try {
     const { id } = req.params;
+    
     const Context = await updateContextInDb(id, req.body);
     res.status(200).json({ data: Context });
   } catch {

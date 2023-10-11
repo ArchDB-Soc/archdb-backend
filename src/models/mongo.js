@@ -24,13 +24,13 @@ const contextSchema = new mongoose.Schema({
   latestDate: { type: Date, required: false },
   spotX: { type: Number, required: false },
   spotY: { type: Number, required: false },
-  sieved: { type: Boolean, required: false },
   dateText: { type: String, required: false },
-  completed: { type: Boolean, required: false },
-  planNA: { type: Boolean, required: false },
   excavationEnd: { type: Date, required: false },
   period: { type: String, required: false },
   dimensions: { type: String, required: false },
+  sieved: { type: Boolean, required: false },
+  completed: { type: Boolean, required: false },
+  planNA: { type: Boolean, required: false },
 });
 
 const recordSchema = new mongoose.Schema({

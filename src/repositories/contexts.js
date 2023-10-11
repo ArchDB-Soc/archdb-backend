@@ -25,8 +25,15 @@ const createContextInDb = async (payload) => {
 };
 
 const updateContextInDb = async (id, payload) => {
+
+  try 
+  {console.log("checkpoint3", id, payload)
   const context = await Context.findByIdAndUpdate(id, payload, { new: true });
-  return context;
+  console.log("checkpoint4", context)
+  return context;}
+  catch (error) {
+    console.error(error)
+  }
 };
 
 const deleteContextFromDb = async (id) => {
