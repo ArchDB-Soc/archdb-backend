@@ -1,5 +1,16 @@
 const mongoose = require("mongoose");
 
+const siteSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  latitude: { type: Number, required: false },
+  longitude: { type: Number, required: false },
+  type: { type: String, required: false },
+  date: { type: Date, required: false },
+  excavator: { type: String, required: false },
+  abstract: { type: String, required: false },
+  _contexts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Context" }],
+})
+
 const contextSchema = new mongoose.Schema({
   _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
@@ -49,8 +60,10 @@ const userSchema = new mongoose.Schema({
 const Context = mongoose.model("Context", contextSchema);
 const User = mongoose.model("User", userSchema);
 const Record = mongoose.model("Record", recordSchema);
+const Site = mongoose.model("Site", siteSchema);
+
 
 
 module.exports = {
-  Context, User, Record
+  Context, User, Record, Site
 };
