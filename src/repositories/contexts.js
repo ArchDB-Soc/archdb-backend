@@ -40,10 +40,15 @@ const deleteContextFromDb = async (id) => {
   await Context.deleteOne({ _id: id });
 };
 
+const deleteAllContextsFromDb = async (siteid) => {
+  await Context.deleteMany({_site: siteid})
+}
+
 module.exports = {
   getAllContextsFromDb,
   getContextByIdFromDb,
   createContextInDb,
   updateContextInDb,
   deleteContextFromDb,
+  deleteAllContextsFromDb
 };
