@@ -11,12 +11,17 @@ const siteSchema = new mongoose.Schema({
   _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
 })
 
-// const setSchema = new mongoose.Schema({
-//   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
-// })
+const setSchema = new mongoose.Schema({
+  _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
+  title: { type: String, required: false },
+  period: { type: String, required: false },
+  notes: { type: String, required: false },
+  _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
+})
 
 const recordSchema = new mongoose.Schema({
   _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
+  _sets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Set" }],
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site", required: true },
   siteName: { type: String, required: false },
   checkedBy: { type: String, required: false },
@@ -57,10 +62,11 @@ const userSchema = new mongoose.Schema({
   role: { type: String, required: true },
 })
 
+const Site = mongoose.model("Site", siteSchema);
+const Set = mongoose.model("Set", setSchema);
 const Record = mongoose.model("Record", recordSchema);
 const User = mongoose.model("User", userSchema);
-const Site = mongoose.model("Site", siteSchema);
 
 module.exports = {
-  Record, User, Site
+  Site, Set, Record, User
 };

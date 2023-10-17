@@ -6,8 +6,9 @@ const {
   deleteSiteFromDb,
 } = require("../repositories/sites");
 const { setError } = require("../config/error");
-const {getRecordByIdFromDb, updateRecordInDb} = require("../repositories/records")
+const {getRecordByIdFromDb, updateRecordInDb, deleteAllRecordsFromDb} = require("../repositories/records")
 const { Site } = require("../models/mongo");
+const { deleteAllSetsFromDb } = require("../repositories/sets");
 
 const getAllSites = async (req, res, next) => {
   try {
@@ -56,7 +57,8 @@ const deleteSite = async (req, res, next) => {
   try
   {const {id} = req.params
   await deleteSiteFromDb(id) // remove Site from database
-  await deleteAllRecordsFromDb(id) // remove associated Records to avoid orphans
+  await deleteAllRecordsFromDb(id) // remove any associated Records
+  await deleteAllSetsFromDb(id) // remove any associated Sets
   res.status(200).json({data: "Site deleted"})}
 catch {
 return next(setError(400, "Can't delete site"))

@@ -11,18 +11,16 @@ const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
 const getAllRecords = async (req, res, next) => {
   try {
     const { filter } = req.query;
-    console.log("hello")
     const Records = await getAllRecordsFromDb(filter);
     res.status(200).json({ data: Records });
   } catch {
-    return next(setError(400, "Can't find Records hello"));
+    return next(setError(400, "Can't find Records"));
   }
 };
 
 const getRecordById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const Record = await getRecordByIdFromDb(id);
     res.status(200).json({ data: Record });
   } catch {
@@ -44,13 +42,9 @@ const addRecordToSite = async (req, res,next) => {
 
   try {
     const id = req.params.id
-    console.log("checkpoint1",id)
   const newRecord = await createRecordInDb(req.body)
-  console.log("checkpoint2",newRecord)
   newRecord._site = id
-  console.log("checkpoint3",newRecord)
   let site = await getSiteByIdFromDb(id)
-  console.log("checkpoint4",site)
 site._records.push(newRecord)
 const updatedSite = await updateSiteInDb(id, site)
 console.log("checkpoint5",updatedSite)
