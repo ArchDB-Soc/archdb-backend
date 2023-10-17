@@ -14,6 +14,7 @@ const siteSchema = new mongoose.Schema({
 const contextSchema = new mongoose.Schema({
   _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
+  siteName: { type: String, required: false },
   checkedBy: { type: String, required: false },
   enteredBy: { type: String, required: false },
   eastings: { type: Number, required: false },
