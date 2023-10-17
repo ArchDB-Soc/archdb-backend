@@ -44,11 +44,6 @@ const contextSchema = new mongoose.Schema({
   planNA: { type: Boolean, required: false },
 });
 
-const recordSchema = new mongoose.Schema({
-  _context: {type: mongoose.Schema.Types.ObjectId, 
-    ref: "Context"},
-    name: { type: String, required: false },
-})
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: false },
@@ -59,11 +54,10 @@ const userSchema = new mongoose.Schema({
 
 const Context = mongoose.model("Context", contextSchema);
 const User = mongoose.model("User", userSchema);
-const Record = mongoose.model("Record", recordSchema);
 const Site = mongoose.model("Site", siteSchema);
 
 
 
 module.exports = {
-  Context, User, Record, Site
+  Context, User, Site
 };

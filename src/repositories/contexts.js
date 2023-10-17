@@ -32,7 +32,7 @@ const updateContextInDb = async (id, payload) => {
   console.log("checkpoint4", context)
   return context;}
   catch (error) {
-    console.error(error)
+    console.error
   }
 };
 

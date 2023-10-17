@@ -24,7 +24,6 @@ const createSiteInDb = async (payload) => {
   return newSite;
 };
 
-
 const updateSiteInDb = async (id, payload) => {
   const site = await Site.findByIdAndUpdate(id, payload, { new: true });
   

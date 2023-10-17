@@ -6,7 +6,7 @@ const {
   deleteContextFromDb,
 } = require("../repositories/contexts");
 const { setError } = require("../config/error");
-const { deleteRecordFromDb, deleteAllRecordsFromDb } = require("../repositories/records");
+const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
 
 const getAllContexts = async (req, res, next) => {
   try {
@@ -40,6 +40,27 @@ const createContext = async (req, res, next) => {
   }
 };
 
+const addContextToSite = async (req, res,next) => {
+
+  try {
+    const id = req.params.id
+    console.log("checkpoint1",id)
+  const newContext = await createContextInDb(req.body)
+  console.log("checkpoint2",newContext)
+  newContext._site = id
+  console.log("checkpoint3",newContext)
+  let site = await getSiteByIdFromDb(id)
+  console.log("checkpoint4",site)
+site._contexts.push(newContext)
+const updatedSite = await updateSiteInDb(id, site)
+console.log("checkpoint5",updatedSite)
+  res.status(201).json(newContext)
+  console.log(`New context ${newContext._id} added to site ${updatedSite._id}`)
+} catch {
+    return next(setError(400, "Can't add context"))
+  }
+}
+
 const updateContextById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -66,6 +87,7 @@ module.exports = {
   getAllContexts,
   getContextById,
   createContext,
+  addContextToSite,
   updateContextById,
   deleteContext,
 };
