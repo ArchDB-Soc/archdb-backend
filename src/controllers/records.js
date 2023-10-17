@@ -1,106 +1,106 @@
 const {
-  getAllContextsFromDb,
-  getContextByIdFromDb,
-  createContextInDb,
-  updateContextInDb,
-  deleteContextFromDb,
+  getAllRecordsFromDb,
+  getRecordByIdFromDb,
+  createRecordInDb,
+  updateRecordInDb,
+  deleteRecordFromDb,
 } = require("../repositories/records");
 const { setError } = require("../config/error");
 const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
 
-const getAllContexts = async (req, res, next) => {
+const getAllRecords = async (req, res, next) => {
   try {
     const { filter } = req.query;
     console.log("hello")
-    const Contexts = await getAllContextsFromDb(filter);
-    res.status(200).json({ data: Contexts });
+    const Records = await getAllRecordsFromDb(filter);
+    res.status(200).json({ data: Records });
   } catch {
-    return next(setError(400, "Can't find Contexts hello"));
+    return next(setError(400, "Can't find Records hello"));
   }
 };
 
-const getContextById = async (req, res, next) => {
+const getRecordById = async (req, res, next) => {
   try {
     const { id } = req.params;
     console.log(id);
-    const Record = await getContextByIdFromDb(id);
+    const Record = await getRecordByIdFromDb(id);
     res.status(200).json({ data: Record });
   } catch {
     return next(setError(400, "Can't find Record"));
   }
 };
 
-const createContext = async (req, res, next) => {
+const createRecord = async (req, res, next) => {
   try {
-    const ContextObject = { ...req.body };
-    const newContext = await createContextInDb(ContextObject);
-    res.status(201).json({ data: newContext });
+    const RecordObject = { ...req.body };
+    const newRecord = await createRecordInDb(RecordObject);
+    res.status(201).json({ data: newRecord });
   } catch {
     return next(setError(400, "Can't create Record"));
   }
 };
 
-const addContextToSite = async (req, res,next) => {
+const addRecordToSite = async (req, res,next) => {
 
   try {
     const id = req.params.id
     console.log("checkpoint1",id)
-  const newContext = await createContextInDb(req.body)
-  console.log("checkpoint2",newContext)
-  newContext._site = id
-  console.log("checkpoint3",newContext)
+  const newRecord = await createRecordInDb(req.body)
+  console.log("checkpoint2",newRecord)
+  newRecord._site = id
+  console.log("checkpoint3",newRecord)
   let site = await getSiteByIdFromDb(id)
   console.log("checkpoint4",site)
-site._contexts.push(newContext)
+site._records.push(newRecord)
 const updatedSite = await updateSiteInDb(id, site)
 console.log("checkpoint5",updatedSite)
-  res.status(201).json(newContext)
-  console.log(`New record ${newContext._id} added to site ${updatedSite._id}`)
+  res.status(201).json(newRecord)
+  console.log(`New record ${newRecord._id} added to site ${updatedSite._id}`)
 } catch {
     return next(setError(400, "Can't add record"))
   }
 }
 
-const updateContextById = async (req, res, next) => {
+const updateRecordById = async (req, res, next) => {
   try {
     const { id } = req.params;
     
-    const Record = await updateContextInDb(id, req.body);
+    const Record = await updateRecordInDb(id, req.body);
     res.status(200).json({ data: Record });
   } catch {
     return next(setError(400, "Can't update Record"));
   }
 };
 
-// const deleteContext = async (req, res, next) => {
+// const deleteRecord = async (req, res, next) => {
 //   try {
 //     const { id } = req.params;
-//     await deleteContextFromDb(id);
+//     await deleteRecordFromDb(id);
 //     res.status(200).json({ data: "Record deleted" });
 //   } catch {
 //     return next(setError(400, "Can't delete Record"));
 //   }
 // };
 
-const deleteContext = async (req,res,next)=>{
+const deleteRecord = async (req,res,next)=>{
   try
   {const {siteid} = req.params
-  const {contextid} = req.params
+  const {recordid} = req.params
   let site = await getSiteByIdFromDb(siteid)
-  site._contexts.pull(contextid)
+  site._records.pull(recordid)
   await updateSiteInDb(siteid, site)
-  await deleteContextFromDb(contextid)
-  res.status(200).json({data: "Record deleted from Site and Contexts table"})}
+  await deleteRecordFromDb(recordid)
+  res.status(200).json({data: "Record deleted from Site and Records table"})}
 catch {
 return next(setError(400, "Can't delete Record"))
 }
 }
 
 module.exports = {
-  getAllContexts,
-  getContextById,
-  createContext,
-  addContextToSite,
-  updateContextById,
-  deleteContext,
+  getAllRecords,
+  getRecordById,
+  createRecord,
+  addRecordToSite,
+  updateRecordById,
+  deleteRecord,
 };
