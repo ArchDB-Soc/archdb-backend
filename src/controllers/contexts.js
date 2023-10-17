@@ -72,16 +72,29 @@ const updateContextById = async (req, res, next) => {
   }
 };
 
-const deleteContext = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    await deleteContextFromDb(id);
-    await deleteAllRecordsFromDb(id)
-    res.status(200).json({ data: "Context deleted" });
-  } catch {
-    return next(setError(400, "Can't delete Context"));
-  }
-};
+// const deleteContext = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     await deleteContextFromDb(id);
+//     res.status(200).json({ data: "Context deleted" });
+//   } catch {
+//     return next(setError(400, "Can't delete Context"));
+//   }
+// };
+
+const deleteContext = async (req,res,next)=>{
+  try
+  {const {siteid} = req.params
+  const {contextid} = req.params
+  let site = await getSiteByIdFromDb(siteid)
+  site._contexts.pull(contextid)
+  await updateSiteInDb(siteid, site)
+  await deleteContextFromDb(contextid)
+  res.status(200).json({data: "Context deleted from Site and Contexts table"})}
+catch {
+return next(setError(400, "Can't delete Context"))
+}
+}
 
 module.exports = {
   getAllContexts,
