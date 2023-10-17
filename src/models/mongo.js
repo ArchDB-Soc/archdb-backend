@@ -8,10 +8,10 @@ const siteSchema = new mongoose.Schema({
   date: { type: Date, required: false },
   excavator: { type: String, required: false },
   abstract: { type: String, required: false },
-  _contexts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Context" }],
+  _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
 })
 
-const contextSchema = new mongoose.Schema({
+const recordSchema = new mongoose.Schema({
   _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
   siteName: { type: String, required: false },
@@ -25,7 +25,7 @@ const contextSchema = new mongoose.Schema({
   composition: { type: String, required: false },
   description: { type: String, required: false },
   notes: { type: String, required: false },
-  contextType: { type: String, required: false },
+  recordType: { type: String, required: false },
   setNum: { type: Number, required: false },
   thickness: { type: Number, required: false },
   fillOf: { type: Number, required: false },
@@ -53,12 +53,12 @@ const userSchema = new mongoose.Schema({
   role: { type: String, required: true },
 })
 
-const Context = mongoose.model("Context", contextSchema);
+const Record = mongoose.model("Record", recordSchema);
 const User = mongoose.model("User", userSchema);
 const Site = mongoose.model("Site", siteSchema);
 
 
 
 module.exports = {
-  Context, User, Site
+  Record, User, Site
 };

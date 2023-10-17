@@ -4,7 +4,7 @@ const {
   createContextInDb,
   updateContextInDb,
   deleteContextFromDb,
-} = require("../repositories/contexts");
+} = require("../repositories/records");
 const { setError } = require("../config/error");
 const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
 
@@ -23,10 +23,10 @@ const getContextById = async (req, res, next) => {
   try {
     const { id } = req.params;
     console.log(id);
-    const Context = await getContextByIdFromDb(id);
-    res.status(200).json({ data: Context });
+    const Record = await getContextByIdFromDb(id);
+    res.status(200).json({ data: Record });
   } catch {
-    return next(setError(400, "Can't find Context"));
+    return next(setError(400, "Can't find Record"));
   }
 };
 
@@ -36,7 +36,7 @@ const createContext = async (req, res, next) => {
     const newContext = await createContextInDb(ContextObject);
     res.status(201).json({ data: newContext });
   } catch {
-    return next(setError(400, "Can't create Context"));
+    return next(setError(400, "Can't create Record"));
   }
 };
 
@@ -55,9 +55,9 @@ site._contexts.push(newContext)
 const updatedSite = await updateSiteInDb(id, site)
 console.log("checkpoint5",updatedSite)
   res.status(201).json(newContext)
-  console.log(`New context ${newContext._id} added to site ${updatedSite._id}`)
+  console.log(`New record ${newContext._id} added to site ${updatedSite._id}`)
 } catch {
-    return next(setError(400, "Can't add context"))
+    return next(setError(400, "Can't add record"))
   }
 }
 
@@ -65,10 +65,10 @@ const updateContextById = async (req, res, next) => {
   try {
     const { id } = req.params;
     
-    const Context = await updateContextInDb(id, req.body);
-    res.status(200).json({ data: Context });
+    const Record = await updateContextInDb(id, req.body);
+    res.status(200).json({ data: Record });
   } catch {
-    return next(setError(400, "Can't update Context"));
+    return next(setError(400, "Can't update Record"));
   }
 };
 
@@ -76,9 +76,9 @@ const updateContextById = async (req, res, next) => {
 //   try {
 //     const { id } = req.params;
 //     await deleteContextFromDb(id);
-//     res.status(200).json({ data: "Context deleted" });
+//     res.status(200).json({ data: "Record deleted" });
 //   } catch {
-//     return next(setError(400, "Can't delete Context"));
+//     return next(setError(400, "Can't delete Record"));
 //   }
 // };
 
@@ -90,9 +90,9 @@ const deleteContext = async (req,res,next)=>{
   site._contexts.pull(contextid)
   await updateSiteInDb(siteid, site)
   await deleteContextFromDb(contextid)
-  res.status(200).json({data: "Context deleted from Site and Contexts table"})}
+  res.status(200).json({data: "Record deleted from Site and Contexts table"})}
 catch {
-return next(setError(400, "Can't delete Context"))
+return next(setError(400, "Can't delete Record"))
 }
 }
 
