@@ -35,8 +35,8 @@ const deleteSiteFromDb = async (id) => {
   await Site.deleteOne({ _id: id });
 };
 
-const deleteAllSitesFromDb = async (contextid) => {
-  await Site.deleteMany({_context: contextid})
+const deleteAllSitesFromDb = async (recordid) => {
+  await Site.deleteMany({_record: recordid})
 }
 
 module.exports = {

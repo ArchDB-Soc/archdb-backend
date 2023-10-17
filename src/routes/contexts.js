@@ -1,16 +1,16 @@
 const express = require("express")
 const { 
-  getAllContexts, 
-  getContextById, 
-  createContext, 
-  updateContextById } = require("../controllers/contexts")
+  getAllRecords, 
+  getRecordById, 
+  createRecord, 
+  updateRecordById } = require("../controllers/records")
 
 const { hasValidAuthJwt } = require("../middleware/auth")
 
 const router = express.Router()
-router.get("/", getAllContexts)
-router.get("/:id", getContextById)
-router.post("/", hasValidAuthJwt, createContext)
-router.put("/:id", hasValidAuthJwt, updateContextById)
+router.get("/", getAllRecords)
+router.get("/:id", getRecordById)
+router.post("/", hasValidAuthJwt, createRecord)
+router.put("/:id", hasValidAuthJwt, updateRecordById)
 
 module.exports = router
