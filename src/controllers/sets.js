@@ -41,11 +41,16 @@ const getSetById = async (req, res, next) => {
 const addSetToSite = async (req, res,next) => {
   try {
     const id = req.params.id
+    // console.log(id)
   const newSet = await createSetInDb(req.body)
   newSet._site = id
+  
   let site = await getSiteByIdFromDb(id)
+  console.log(site)
 site._sets.push(newSet)
+console.log("site", site)
 const updatedSite = await updateSiteInDb(id, site)
+console.log("updatedSite",updatedSite)
   res.status(201).json(newSet)
   console.log(`New set ${newSet._id} added to site ${updatedSite._id}`)
 } catch {

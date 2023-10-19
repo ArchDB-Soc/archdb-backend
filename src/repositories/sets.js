@@ -20,6 +20,7 @@ const getSetByIdFromDb = async (id) => {
 
 const createSetInDb = async (payload) => {
   const newSet = new Set(payload);
+  
   await newSet.save();
   return newSet;
 };

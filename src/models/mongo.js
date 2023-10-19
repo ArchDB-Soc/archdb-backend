@@ -9,6 +9,7 @@ const siteSchema = new mongoose.Schema({
   excavator: { type: String, required: false },
   abstract: { type: String, required: false },
   _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
+  _sets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Set" }],
 })
 
 const setSchema = new mongoose.Schema({

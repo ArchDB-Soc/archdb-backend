@@ -11,7 +11,9 @@ const getAllSitesFromDb = async (filter) => {
 
 const getSiteByIdFromDb = async (id) => {
   try {
+ 
     const site = await Site.findById(id);
+    
     return site;
   } catch (error) {
     console.log(error);
