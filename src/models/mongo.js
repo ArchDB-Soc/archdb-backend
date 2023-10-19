@@ -22,7 +22,6 @@ const setSchema = new mongoose.Schema({
 })
 
 const recordSchema = new mongoose.Schema({
-  _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
   _set: { type: mongoose.Schema.Types.ObjectId, ref: "Set" },
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
   siteName: { type: String, required: false },
