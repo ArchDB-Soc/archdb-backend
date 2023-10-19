@@ -7,6 +7,7 @@ const {
 } = require("../repositories/records");
 const { setError } = require("../config/error");
 const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
+const { getSetByIdFromDb, updateSetInDb } = require("../repositories/sets");
 
 const getAllRecords = async (req, res, next) => {
   try {
@@ -55,6 +56,23 @@ const updatedSite = await updateSiteInDb(id, site)
   }
 }
 
+const addExistingRecordToSet = async (req, res,next) => {
+
+  try {
+    const setId = req.params.setid
+    const recordId = req.params.recordid
+  const recordToChange = await getRecordByIdFromDb(recordId)
+  recordToChange._set = setId
+  let set = await getSetByIdFromDb(setId)
+set._records.push(recordToChange)
+const updatedSet = await updateSetInDb(setId, set)
+  res.status(201).json(recordToChange)
+  console.log(`Record ${recordToChange._id} added to set ${updatedSet._id}`)
+} catch {
+    return next(setError(400, "Can't add record"))
+  }
+}
+
 const updateRecordById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -65,16 +83,6 @@ const updateRecordById = async (req, res, next) => {
     return next(setError(400, "Can't update Record"));
   }
 };
-
-// const deleteRecord = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     await deleteRecordFromDb(id);
-//     res.status(200).json({ data: "Record deleted" });
-//   } catch {
-//     return next(setError(400, "Can't delete Record"));
-//   }
-// };
 
 const deleteRecord = async (req,res,next)=>{
   try
@@ -97,4 +105,5 @@ module.exports = {
   addRecordToSite,
   updateRecordById,
   deleteRecord,
+  addExistingRecordToSet
 };
