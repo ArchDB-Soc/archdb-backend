@@ -28,20 +28,9 @@ const getSetById = async (req, res, next) => {
   }
 };
 
-// const createSet = async (req, res, next) => {
-//   try {
-//     const SetObject = { ...req.body };
-//     const newSet = await createSetInDb(SetObject);
-//     res.status(201).json({ data: newSet });
-//   } catch {
-//     return next(setError(400, "Can't create Set"));
-//   }
-// };
-
 const addSetToSite = async (req, res,next) => {
   try {
     const id = req.params.id
-    // console.log(id)
   const newSet = await createSetInDb(req.body)
   newSet._site = id
   
@@ -68,16 +57,6 @@ const updateSetById = async (req, res, next) => {
   }
 };
 
-// const deleteSet = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     await deleteSetFromDb(id);
-//     res.status(200).json({ data: "Set deleted" });
-//   } catch {
-//     return next(setError(400, "Can't delete Set"));
-//   }
-// };
-
 const deleteSet = async (req,res,next)=>{
   try
   {const {siteid} = req.params
@@ -95,7 +74,6 @@ return next(setError(400, "Can't delete Set"))
 module.exports = {
   getAllSets,
   getSetById,
-  // createSet,
   addSetToSite,
   updateSetById,
   deleteSet,

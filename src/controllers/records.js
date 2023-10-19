@@ -41,13 +41,13 @@ const createRecord = async (req, res, next) => {
 const addRecordToSite = async (req, res,next) => {
 
   try {
+    
     const id = req.params.id
   const newRecord = await createRecordInDb(req.body)
   newRecord._site = id
   let site = await getSiteByIdFromDb(id)
 site._records.push(newRecord)
 const updatedSite = await updateSiteInDb(id, site)
-console.log("checkpoint5",updatedSite)
   res.status(201).json(newRecord)
   console.log(`New record ${newRecord._id} added to site ${updatedSite._id}`)
 } catch {

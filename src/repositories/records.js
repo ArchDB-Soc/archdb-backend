@@ -20,8 +20,9 @@ const getRecordByIdFromDb = async (id) => {
 
 const createRecordInDb = async (payload) => {
   const newRecord = new Record(payload);
-  await newRecord.save();
-  return newRecord;
+  console.log(newRecord)
+  await newRecord.save()
+  return newRecord
 };
 
 const updateRecordInDb = async (id, payload) => {
