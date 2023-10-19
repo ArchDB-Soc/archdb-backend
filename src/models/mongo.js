@@ -14,6 +14,7 @@ const siteSchema = new mongoose.Schema({
 
 const setSchema = new mongoose.Schema({
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site" },
+  siteName: { type: String, required: true },
   title: { type: String, required: false },
   period: { type: String, required: false },
   notes: { type: String, required: false },
@@ -24,7 +25,7 @@ const recordSchema = new mongoose.Schema({
   _records: [{ type: mongoose.Schema.Types.ObjectId, ref: "Record" }],
   _sets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Set" }],
   _site: { type: mongoose.Schema.Types.ObjectId, ref: "Site", required: true },
-  siteName: { type: String, required: false },
+  siteName: { type: String, required: true },
   checkedBy: { type: String, required: false },
   enteredBy: { type: String, required: false },
   eastings: { type: Number, required: false },
