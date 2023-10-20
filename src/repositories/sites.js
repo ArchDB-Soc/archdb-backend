@@ -37,9 +37,9 @@ const deleteSiteFromDb = async (id) => {
   await Site.deleteOne({ _id: id });
 };
 
-const deleteAllSitesFromDb = async (recordid) => {
-  await Site.deleteMany({_record: recordid})
-}
+// const deleteAllSitesFromDb = async (recordid) => {
+//   await Site.deleteMany({_record: recordid})
+// }
 
 module.exports = {
   getAllSitesFromDb,
@@ -47,5 +47,5 @@ module.exports = {
   createSiteInDb,
   updateSiteInDb,
   deleteSiteFromDb,
-  deleteAllSitesFromDb
+  // deleteAllSitesFromDb
 };

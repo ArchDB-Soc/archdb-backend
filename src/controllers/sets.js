@@ -7,6 +7,9 @@ const {
 } = require("../repositories/sets");
 const { setError } = require("../config/error");
 const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
+const { getRecordsBySetIdFromDb, updateRecordInDb, removeSetFromRecordsInDb } = require("../repositories/records");
+const { Record } = require("../models/mongo");
+
 
 const getAllSets = async (req, res, next) => {
   try {
@@ -57,15 +60,16 @@ const updateSetById = async (req, res, next) => {
 };
 
 const deleteSet = async (req,res,next)=>{
-  try
-  {const {siteid} = req.params
+  try {
+    const {siteid} = req.params
   const {setid} = req.params
   let site = await getSiteByIdFromDb(siteid)
   site._sets.pull(setid)
   await updateSiteInDb(siteid, site)
+  await removeSetFromRecordsInDb(setid)
   await deleteSetFromDb(setid)
-  res.status(200).json({data: "Set deleted from Site and Sets table"})}
-catch {
+  res.status(200).json({data: "Set deleted"})
+} catch {
 return next(setError(400, "Can't delete Set"))
 }
 }

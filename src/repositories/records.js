@@ -28,22 +28,40 @@ const createRecordInDb = async (payload) => {
 const updateRecordInDb = async (id, payload) => {
 
   try 
-  {console.log("checkpoint3", id, payload)
+  {console.log("6 id/payload", id, payload)
   const record = await Record.findByIdAndUpdate(id, payload, { new: true });
-  console.log("checkpoint4", record)
   return record;}
   catch (error) {
     console.error
   }
 };
 
+const removeSetFromRecordsInDb = async (setid) => {
+  try {
+    const result = await Record.updateMany(
+      { _set: setid},
+      { $unset: { _set: 1 } }
+    );
+return result
+  } catch (error) {
+    console.error
+  }
+}
+
 const deleteRecordFromDb = async (id) => {
   await Record.deleteOne({ _id: id });
 };
 
-const deleteAllRecordsFromDb = async (siteid) => {
-  await Record.deleteMany({_site: siteid})
+const deleteAllRecordsFromDb = async (siteId) => {
+  await Record.deleteMany({_site: siteId})
 }
+
+const getRecordsBySetIdFromDb = async (setId) => {
+    const records = await Record.find({ _set: setId});
+   console.log(records)
+    return records;
+  
+  }
 
 module.exports = {
   getAllRecordsFromDb,
@@ -51,5 +69,7 @@ module.exports = {
   createRecordInDb,
   updateRecordInDb,
   deleteRecordFromDb,
-  deleteAllRecordsFromDb
+  deleteAllRecordsFromDb,
+  getRecordsBySetIdFromDb,
+  removeSetFromRecordsInDb
 };
