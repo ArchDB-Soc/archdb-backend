@@ -1,10 +1,10 @@
-# iadb backend
+# ArchDB (Archeological Database) backend
 
-The Integrated Archaeological Database (IADB) enables archaeologists to record details from an excavation and to develop interpretations of what they have found.
+The Archaeological Database (ArchDB) enables archaeologists to record details from an excavation and to develop interpretations of what they have found.
 
-The Berkshire Archæological Society, the University of Reading and the York Archaeological Trust have been using IADB 2017. This is likely to be deprecated by 2025.
+The Berkshire Archæological Society, the University of Reading and the York Archaeological Trust have been using a previous version of similar software. This is likely to be deprecated by 2025.
 
-This project is to help them explore options for developing a new IADB from scratch. Right now it uses sample data.
+This project is to help them explore options for developing a new product from scratch. Right now it uses sample data.
 
 Feedback is welcome, feel free to get in contact with suggestions.
 
