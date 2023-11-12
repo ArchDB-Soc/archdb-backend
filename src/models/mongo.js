@@ -62,23 +62,17 @@ recordSchema.pre('save', async function (next) {
     return next(); 
   }
 
-  // const count = await Record.countDocuments({}).exec();
-  // const paddedCount = String(count + 1).padStart(3, '0'); 
-  //  this.friendlyId = `${this.siteName.substring(0, 3)}${paddedCount}`;
-  
   let isUnique = false;
     let count = 1; 
 
     while (!isUnique) {
       const paddedCount = String(count).padStart(3, '0');
       this.friendlyId = `${this.siteName.substring(0, 3)}${paddedCount}`;
-
-      // Check if the generated name is unique
       const existingRecord = await Record.findOne({ friendlyId: this.friendlyId }).exec();
       if (!existingRecord) {
         isUnique = true;
       } else {
-        count++; // Increment the count and try again
+        count++; 
       }
     }
   

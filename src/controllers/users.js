@@ -1,14 +1,14 @@
 const {
   getAllUsersFromDb, 
   getUserByIdFromDb, 
-  // createUserInDb,
+   createUserInDb,
   updateUserInDb,
   deleteUserFromDb,
   getUserByEmailFromDb
 } = require("../repositories/users")
 const {setError} = require("../config/error")
 const { 
-  // hashPassword, 
+   hashPassword, 
   verifyPassword } = require("../config/password")
 const { signToken } = require("../config/jwt")
 
@@ -52,24 +52,24 @@ await deleteUserFromDb(id)
   }
   }
 
-  // const registerUser = async (req,res)=>{
-  //   try {
-  //   const {email,password,role} = req.body
+  const registerUser = async (req,res)=>{
+    try {
+    const {email,password,role} = req.body
 
-  //   if (password.length >= 6) 
-  // {const hash = await hashPassword(password)
+    if (password.length >= 6) 
+  {const hash = await hashPassword(password)
   
   
-  // const newUser = await createUserInDb({email, password: hash, role})
-  // res.status(201).json({data: newUser})} else {
-  //   res.status(400).json({data: "Password must be at least 6 characters"})
-  // }
+  const newUser = await createUserInDb({email, password: hash, role})
+  res.status(201).json({data: newUser})} else {
+    res.status(400).json({data: "Password must be at least 6 characters"})
+  }
   
-  //   } catch (err) {
-  //     console.log("Error creating user", err)
-  //     res.status(400).json({data: "Error registering user"})
-  //   }
-  // }
+    } catch (err) {
+      console.log("Error creating user", err)
+      res.status(400).json({data: "Error registering user"})
+    }
+  }
   
   const loginUser = async (req, res, next)=>{
     try {
@@ -116,7 +116,7 @@ module.exports = {
   getUserById, 
   updateUserById,
   deleteUser,
-  // registerUser,
+  registerUser,
   loginUser,
   getUser
 }

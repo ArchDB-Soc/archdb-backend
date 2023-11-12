@@ -9,6 +9,17 @@ const getAllRecordsFromDb = async (filter) => {
   catch (error) { console.log("Error:", error)}
 };
 
+const getRecordsFromDb = async (startIndex, itemsPerPage) => {
+  console.log("checkpoint1")
+  console.log(startIndex, itemsPerPage)
+  const Records = await Record.find({})
+      .skip(startIndex)
+      .limit(itemsPerPage)
+      // .toArray();
+
+   return Records
+}
+
 const getRecordByIdFromDb = async (id) => {
   try {
     const record = await Record.findById(id);
@@ -71,5 +82,6 @@ module.exports = {
   deleteRecordFromDb,
   deleteAllRecordsFromDb,
   getRecordsBySetIdFromDb,
+  getRecordsFromDb,
   removeSetFromRecordsInDb
 };

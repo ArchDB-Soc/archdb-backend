@@ -4,16 +4,29 @@ const {
   createRecordInDb,
   updateRecordInDb,
   deleteRecordFromDb,
+  getRecordsFromDb
 } = require("../repositories/records");
 const { setError } = require("../config/error");
 const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
 const { getSetByIdFromDb, updateSetInDb } = require("../repositories/sets");
 
+const itemsPerPage = 10
+
 const getAllRecords = async (req, res, next) => {
   try {
-    const { filter } = req.query;
-    const Records = await getAllRecordsFromDb(filter);
-    res.status(200).json({ data: Records });
+    // const { filter } = req.query;
+    // const Records = await getAllRecordsFromDb(filter);
+    // res.status(200).json({ data: Records });
+    const page = parseInt(req.query.page) || 1
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = page * itemsPerPage;
+    const itemsForPage = await getRecordsFromDb(startIndex, itemsPerPage);
+    res.status(200).json({
+      currentPage: page,
+      // totalPages: Math.ceil(allItems.length / itemsPerPage),
+      data: itemsForPage,
+    });
+
   } catch {
     return next(setError(400, "Can't find Records"));
   }
