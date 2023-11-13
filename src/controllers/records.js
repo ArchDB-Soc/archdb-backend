@@ -1,5 +1,5 @@
 const {
-  getAllRecordsFromDb,
+  // getAllRecordsFromDb,
   getRecordByIdFromDb,
   createRecordInDb,
   updateRecordInDb,

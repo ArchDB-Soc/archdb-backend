@@ -1,13 +1,13 @@
 const { Record } = require("../models/mongo");
 
-const getAllRecordsFromDb = async (filter) => {
-  try {const descriptionFilterOptions = {
-    description: { $regex: new RegExp(filter, "i") },
-  };
-  const Records = await Record.find(filter ? descriptionFilterOptions : {});
-  return Records;}
-  catch (error) { console.log("Error:", error)}
-};
+// const getAllRecordsFromDb = async (filter) => {
+//   try {const descriptionFilterOptions = {
+//     description: { $regex: new RegExp(filter, "i") },
+//   };
+//   const Records = await Record.find(filter ? descriptionFilterOptions : {});
+//   return Records;}
+//   catch (error) { console.log("Error:", error)}
+// };
 
 const getRecordsFromDb = async (startIndex, itemsPerPage) => {
   console.log("checkpoint1")
@@ -75,7 +75,7 @@ const getRecordsBySetIdFromDb = async (setId) => {
   }
 
 module.exports = {
-  getAllRecordsFromDb,
+  // getAllRecordsFromDb,
   getRecordByIdFromDb,
   createRecordInDb,
   updateRecordInDb,
