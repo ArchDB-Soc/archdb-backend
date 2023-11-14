@@ -10,7 +10,7 @@ const { setError } = require("../config/error");
 const { getSiteByIdFromDb, updateSiteInDb } = require("../repositories/sites");
 const { getSetByIdFromDb, updateSetInDb } = require("../repositories/sets");
 
-const itemsPerPage = 10
+const itemsPerPage = 2
 
 const getAllRecords = async (req, res, next) => {
   try {
