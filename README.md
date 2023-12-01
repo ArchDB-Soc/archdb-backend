@@ -15,3 +15,4 @@ Find the frontend here: [https://github.com/plabram/iadb](https://github.com/pla
 * MongoDB has been used due to support for geospatial queries. Depsite this, documents are related by ID, meaning they behave similarly to a relational database. Different schema fields have been in use for some time, meaning they are unlikely to change much.
 * All database interactions are separated into `repositories`.
 * As well as a Mongo ID, schema Records has a friendlyId. This is so humans can easily recognise each Record.
+* There are 3 main objects in the data model: Sites (grandparent), Sets (parent) and Records (child). The relationship between Sets and Records is flexible and the two can exist independently, however the relationship between Sites and other entities is strongly protected. As such, it's obligatory to add a Site to other records, and deleting a Site will delete all related records. This goes for front and backend.
