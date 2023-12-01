@@ -2,17 +2,16 @@
 
 The Archaeological Database (ArchDB) enables archaeologists to record details from an excavation and to develop interpretations of what they have found.
 
-The Berkshire Archæological Society, the University of Reading and the York Archaeological Trust have been using a previous version of similar software. This is likely to be deprecated by 2025.
+Various universities and trusts have been using a previous version of similar software. This is likely to be deprecated by 2025.
 
-This project is to help them explore options for developing a new product from scratch. Right now it uses sample data.
+This project is to help them share resources and records to create an integrated database that unifies records into the same common structure, thus allowing for new possibilities in terms of data analysis and modelling. 
 
-Feedback is welcome, feel free to get in contact with suggestions.
+We welcome contributions. See how to provide them [here](https://github.com/plabram/archdb-backend/blob/main/CONTRIBUTIONS.md).
 
 Find the frontend here: [https://github.com/plabram/iadb](https://github.com/plabram/iadb-frontend)
 
-* This app is built with Node/Express. It connects to MongoDB Atlas using Mongoose.
+## Notes:
+* This app is primarily built with Node/Express/MongoDB/Mongoose, as well as associated packages.
 * MongoDB has been used due to support for geospatial queries. Depsite this, documents are related by ID, meaning they behave similarly to a relational database. Different schema fields have been in use for some time, meaning they are unlikely to change much.
-* It's deployed using Render for convenience.
-* All database interactions are separated into `repositories`. This means the database can easily be changed (for example, from MongoDB to Postgres), and unit tests can be set up easily.
-* Express Rate Limit restricts the number of requests an IP can make for security.
-* As well as a Mongo ID, schema Records has a friendlyId. This is so people can easily recognise each Record.
+* All database interactions are separated into `repositories`.
+* As well as a Mongo ID, schema Records has a friendlyId. This is so humans can easily recognise each Record.
